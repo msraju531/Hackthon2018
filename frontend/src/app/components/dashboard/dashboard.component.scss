@@ -1,0 +1,373 @@
+
+.toolbar__background {
+  width: 100%;
+  height: 112px;
+  background-color: #02275c;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+}
+.uploadBtnBlock{
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (min-device-width: 370px) and (max-device-width: 375px) and (orientation:portrait) {
+  .toolbar__background {
+   display: none !important;
+   background-color: red;
+  }
+  
+}
+.toshiba_logo_home{
+    font-size: 54px;
+    display: inline-block;
+}
+.toshiba_user{
+    font-size: 15px;
+    letter-spacing: -0px;
+    color: #ffffff;
+    float: right;
+    margin-top:22px;
+    margin-right: 75px;
+    font-family: OpenSans;
+}
+
+.homeMainDiv{
+  margin-left: 130px;
+}
+
+.sideDropdown{
+    width: 90px;
+    height: 45px;
+    background-color: #fff;
+    position: absolute;
+    right: 0px;
+    top: 48px;
+    padding: 10px;
+    color: #000;
+    margin-right: 75px;
+}
+.sideDropdown ul{
+  padding:0px;
+  list-style: none;
+}
+.sideDropdown ul li{
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.downloadClassBtn{
+  padding :30px;
+}
+
+#btn-upload
+{
+  max-width: 131px;
+}
+
+
+.tile{
+  border: 2px solid #233d77;
+  width: 463px;
+  height: 339px;
+  border-radius: 15px;
+  text-align: center;
+  -webkit-box-shadow: 4px 4px 4px #233d77;
+  // box-shadow: 4px 4px 4px #233d77;
+  box-shadow: 0px 0px 10px #233d77;
+  margin-bottom: 30px;
+  margin-top: 65px;
+  padding:85px;
+}
+.btn-primary{
+  padding: 17px 42px;
+  font-size: 16px;
+  background-color:#233d77;
+  font-family: OpenSans;
+}
+.btn-ok{
+  padding:10px 27px;
+}
+.btn-close{
+  padding: 10px 19px;
+}
+.down-arrow{
+  padding: 2px;
+  cursor: pointer;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 8px 8px 10px #233d77;
+}
+.btn-ok, .btn-close{
+  box-shadow: none;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;   
+    cursor: inherit;
+    display: block;
+}
+.modal-content{
+  width: 811px;
+  height: 453px;
+  // width: 762px;
+  // height: 470px;
+  margin-top: 118px;
+  box-sizing: border-box;
+}
+.modal-title{
+  text-align: center;
+  font-size: 22px;
+  font-family: OpenSans;
+  font-weight: bold;
+}
+.customerDiv{
+  width:100px;
+  height:20px;
+}
+.margin-auto {
+  margin: 0 auto;
+}
+
+@media only screen and (max-width:1280px){
+  .margin-left-50 {
+      margin-left: 50px !important;
+  }
+}
+
+@media only screen and (max-width:890px){
+  .modal-content{
+    width: 421px;
+    height: 591px;
+    margin-top: 118px;
+    box-sizing: border-box;
+  }
+}
+
+
+@media only screen and (max-width:890px){
+  .tile {
+    margin-left: 10px;
+  }
+  .staticText{
+    font-family: OpenSans;
+    font-size: 40px;
+    margin-top: 20px;
+    text-align: inherit;
+    color: #02275c;
+  
+  }
+}
+
+
+.modal-footer{
+  border-top:0px;
+  padding: 11px;
+}
+
+.staticText{
+  font-family: OpenSans;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20px;
+  color: #02275c;
+}
+
+
+
+.loaderClass{
+  text-align: center;
+  font-size:22px;
+  font-family: OpenSans;
+  margin-bottom:10px;
+  // width:70px;
+  // height: 10px;
+}
+
+.demandUploadTitle{
+  text-align:center;
+  padding: 15px;
+  font-size:22px;
+
+}
+.uploadClass{
+  padding: 8px;
+}
+
+.successMessage{
+  color:green;
+  font-size: 18px;
+  font-family: OpenSans;
+  padding: 10px 0px;
+  // font-weight: 540;
+
+}
+.errorMessage{
+  color:red;
+  font-size:14px;
+  // font-family: OpenSans;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight: 540;
+  padding: 10px 0px;
+}
+
+//radio buttons
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.radio-inline{
+  position: relative;
+  display: inline-block;
+  /* padding-left: 20px; */
+  margin-bottom: 0;
+  vertical-align: middle;
+  /* font-weight: normal; */
+  cursor: pointer;
+  font-size: 17px;
+  font-style: arial;
+  font-family: OpenSans;
+  font-weight: inherit;
+  padding-left:0px;
+}
+.radioTitles{
+  font-size: 17px;
+  font-family: OpenSans;
+}
+
+.categoryClass{
+  padding:30px;
+  display:flex;
+  
+}
+.btns{
+  padding:30px;
+  float:right;
+}
+
+.maxWidth-col{
+  max-width: max-content;
+}
+
+@media screen and (-ms-high-contrast: none), (-ms-high-contrast: active) {    
+  .marginLeft-cat1,.marginLeft-cat2,.marginLeft-cust1,.marginLeft-prod1,.marginLeft-prod2{
+    margin-left: 0px !important; 
+  }
+}
+.marginLeft-cat1{
+  margin-left: 28px;
+}
+.marginLeft-cat2{
+  margin-left: 18px;
+
+}
+.marginLeft-cust1{
+  margin-left: 25px;
+
+}
+.marginLeft-prod1{
+  margin-left: 38px;
+}
+.marginLeft-prod2{
+  margin-left: 13px;
+}
+.marginLeft-ver1{
+  margin-left: 10px;
+}
+
+.dropdownSelect :focus {
+  outline: black auto 5px !important;
+  outline-color: black !important;
+  // outline: #233d77 auto 5px !important;
+  // outline-color: #233d77 !important;
+  background-color: #233d77;
+}
+
+
+.dropdown{
+  padding: 8px;
+  font-size: 17px;
+  font-family: OpenSans;
+}
+
+.dropdownSelect{
+  width: 152px;
+  // padding: 0px 25px;
+  border-radius: 9px;
+  // margin-top: 10px;
+  // margin-right: 61px;
+}
+
+//borderClass
+.borderClass{
+  border: 2px solid #233d77;
+  /* padding: 30px; */
+  width: 754px;
+  height: 500px;
+  margin-left: 306px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 4px #233d77;
+  margin-bottom: 30px;
+}
+
+//usermanagement====================================
+.toshiba_user{
+  font-size: 15px;
+  letter-spacing: -0px;
+  color: #ffffff;
+  float: right;
+  margin-top:22px;
+  margin-right: 75px;
+  font-weight: bold;
+}
+.user-management a{
+  color:#fff;
+  margin-left: 10px;
+  text-decoration: none;
+}
+.user-management a:hover{
+  color:#ff0000;
+}
+.user-management:hover{
+  color:#ff0000;
+}
+
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 43%;
+  opacity: 1;
+  z-index: 9999;
+  img {
+      height: 72px;
+  }
+  
+}
+.modal-backdrop.in {
+  opacity: 0.3;
+}
+@media only screen and (max-width: 480px) {
+  .loader {
+      left: 30%;
+  }
+}

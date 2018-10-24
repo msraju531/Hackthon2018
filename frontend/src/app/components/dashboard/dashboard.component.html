@@ -1,0 +1,126 @@
+<!-- Budget OLTP -->
+<div class="staticText">
+	<label>Budget OLTP</label>
+</div>
+
+<div class="uploadBtnBlock">
+	<div class="col-sm-12 col-lg-12 col-md-12 tile">
+		<div class="row loaderClass">
+			<span *ngIf="showLoading">Uploading..
+				<img src="assets/images/ajax-loader.gif">
+			</span>
+			<span class="successMessage" *ngIf="successMessage">{{successMessage}}</span>
+			<span class="errorMessage" *ngIf="showUploadError">{{showUploadError}}</span>
+		</div>
+		<!-- Upload button -->
+		<div class="btn btn-primary btn-file" id="btn-upload">
+			<input type="file" accept=".xlsm" (change)="uploadFile($event)"> Upload
+		</div>
+		<div class="downloadClassBtn">
+			<!-- Trigger the modal with a button -->
+			<button type="button" class="btn btn-primary btn-file" id="btn-upload" data-toggle="modal" data-backdrop="static" 
+			data-keyboard="false" [disabled]="showLoading" (click)='getAllDropdowns()'>Download</button>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog" >
+			<div class="modal-dialog" id="modalDialog">
+				<!-- Modal content -->
+				<div class="modal-content" >
+					<div class="modal-header">
+						<button type="button" class="close" (click)="removeSelectedFilter()" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Download</h4>
+					</div>
+					<div class="modal-body margin-auto  margin-left-50">
+						<div class="row loaderClass">
+							<span class="errorMessage" *ngIf="showMadatoryError">{{showMadatoryError}}</span>
+						</div>
+						<div class="row categoryClass">
+							<div class="col-sm-3 col-md-3 col-lg-3 maxWidth-col">
+								<label class="radioTitle">Category :</label>
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3 marginLeft-cat1">
+								<label class="radio-inline">
+									<input type="radio" class="checkboxClass" name="radio" value="0" [(ngModel)]="radioBtn" checked>Customers
+								</label>
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-cat2">
+								<label class="radio-inline">
+									<input type="radio" class="checkboxClass" name="radio" value="1" [(ngModel)]="radioBtn">Products
+								</label>
+							</div>
+						</div>
+						<div  *ngIf="radioBtn == 0 || radioBtn == 1">
+							<div class="row categoryClass" *ngIf="radioBtn == 0">
+								<div class="col-sm-3 col-md-3 col-lg-3  maxWidth-col">
+									<label for="name" class="radioTitle">*Customers :</label>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-cust1">
+									<select name="game" [(ngModel)]="selectedOpt.customerName" name='customerId' class="dropdownSelect" required>
+										<option disabled selected value>Select</option>
+										<option *ngFor="let customer of customers" [ngValue]="customer.customerName"> {{customer.customerName}} </option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3 " *ngIf="selectedOpt.customerName !=''">
+									<label for="name" class="radioTitle">*Divisions :</label>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-prod2" *ngIf="selectedOpt.customerName !=''">
+									<select name="game" [(ngModel)]="selectedOpt.division" name='customerId' class="dropdownSelect" required>
+										<option disabled selected value>Select</option>
+										<option *ngFor="let division of customerDivisions[selectedOpt.customerName]" [ngValue]="division.customerProjName"> {{division.customerProjName}} </option>
+									</select>
+								</div>
+							</div>
+							<div  class="row categoryClass" *ngIf="radioBtn == 1">
+								<div class="col-sm-3 col-md-3 col-lg-3  maxWidth-col">
+									<label for="name" class="radioTitle">*Products :</label>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-prod1">
+									<select name="game" [(ngModel)]="selectedOpt.productName" name='productId' class="dropdownSelect" required>
+										<option disabled selected value>Select</option>
+										<option *ngFor="let product of products" [ngValue]="product.productName"> {{product.productName}} </option>
+									</select>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-prod2">
+									<label for="name" class="radioTitle">*Forecast Type :</label>
+								</div>
+								<div class="col-sm-3 col-md-3 col-lg-3 ">
+									<select name="game" [(ngModel)]="selectedOpt.forecastType" name='forecastTypeId' class="dropdownSelect" required>
+										<option disabled selected value>Select</option>
+										<option value="SOM"> SOM </option>
+										<option value="TAM"> TAM </option>
+										<option value="BOTH"> BOTH </option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+						<div class="row categoryClass">
+							<div class="col-sm-3 col-md-3 col-lg-3  maxWidth-col">
+								<label for="name" class="radioTitle">*Planning Cycle :</label>
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3 ">
+								<select name="game" [(ngModel)]="selectedOpt.planningCycle" name='planningId' class="dropdownSelect" required>
+									<option disabled selected value>Select</option>
+									<option *ngFor="let planningCycle of planningCycles" [ngValue]="planningCycle.name"> {{planningCycle.name}} </option>
+								</select>
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3 ">
+								<label for="name" class="radioTitle">*Versions :</label>
+							</div>
+							<div class="col-sm-3 col-md-3 col-lg-3  marginLeft-ver1">
+								<select name="game" [(ngModel)]="selectedOpt.forecastCategory" name='versionId' class="dropdownSelect" required>
+									<option disabled selected value>Select</option>
+									<option *ngFor="let version of versions" [ngValue]="version.categoryName"> {{version.categoryName}} </option>
+								</select>
+							</div>
+						</div>
+						<div class="row btns">
+							<button type="button" class="btn btn-primary btn-file btn-ok" (click)='downloadFile()' data-dismiss="modal" *ngIf="!showMadatoryError">Yes</button>
+							<button type="button" class="btn btn-primary btn-file btn-close" (click)='removeSelectedFilter()' data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

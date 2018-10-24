@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row staticTextSel">
+    <h2>Select Category</h2>
+  </div>
+  <div class="row categoryClass">
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <label class="radio-inline staticTextCat ">Category :</label>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <label class="radio-inline">
+        <input type="radio" class="checkboxClass" name="radio" value="0" [(ngModel)]="radioBtn"  checked>Customers
+      </label>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <label class="radio-inline">
+        <input type="radio" class="checkboxClass" name="radio" value="1" [(ngModel)]="radioBtn"  >Products
+      </label>
+    </div>
+  </div>
+  <form [formGroup]="customers" autocomplete="off"  *ngIf="radioBtn == 0" >
+    <div class="row customerClass">
+      <div class="form-group  col-sm-3 col-md-3 col-lg-3">
+          <label>*Customer Name</label>
+          <input class="form-control" name="customer" placeholder="Enter Customer Name" 
+          (keypress)="noWhiteSpaceBegin($event.target.value,'customer')" 
+          formControlName="customer" autocomplete="off" maxlength="50" id="comment" (focus)="clearExistingMsgs()"/>
+      </div>
+    </div>
+    <div class="row divisionFormArr">
+      <div class="col-sm-3 col-md-3 col-lg-3 staticDivisionClass">
+        <button class="btn btn-new-user " (click)="addDivision();">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          <span>Add Division</span>
+        </button>
+      </div>
+    </div>
+    <div  formArrayName="divisions">
+      <div *ngFor="let div of formData.controls; let idx = index;">
+        <div class="row" [formGroupName]="idx" >
+          <div class=" col-sm-3 col-md-3 col-lg-3 divisionClass">
+            <input class="form-control" placeholder="Enter Division Name" 
+            name="division" (keypress)="noWhiteSpaceBeginDiv($event.target.value,'customerProjName',idx)" 
+            formControlName="customerProjName" maxlength="50"  autocomplete="off" id="comment"/>
+          </div>
+          <span class="addDropDownMinus" (click)="removeCusProd(idx)" style="cursor:pointer;padding-top:20px;" *ngIf="idx > 0" >
+            <span><img src="./assets/images/minus-circle.png" style="padding-top:30px"></span>
+          </span>  
+        </div>
+      </div>
+    </div>
+  </form>
+  <form [formGroup]="products" autocomplete="off" *ngIf="radioBtn == 1" >
+    <div class="row customerClass" >
+      <div class="form-group  col-sm-3 col-md-3 col-lg-3">
+        <label>*Product Name</label>
+        <input class="form-control" name="product" placeholder="Enter Product Name" 
+        (keypress)="noWhiteSpaceBegin($event.target.value,'product')" formControlName="product" 
+        autocomplete="off" id="comment" maxlength="50"  (focus)="clearExistingMsgs()"/>
+      </div>
+    </div>
+  </form>
+  <div class="row addCategory" style="padding-top:48px;margin-bottom: 10px;">
+    <div class="col-sm-10">
+      <div class="successMessage" *ngIf='addUserResponseStatus'>{{addUserResponseMessage}}</div>
+      <div class="errorMessage" *ngIf='!addUserResponseStatus'>{{addUserErrorMessage}}</div>
+      <button class="btn btn-cancel" (click)='cancel()'>Cancel</button>
+      <button class="btn btn-done" (click)="addCusDivBtn('customers')" [disabled]="!customers.valid"  [style.cursor]="customers.valid  ? 'pointer'  : 'no-drop'" *ngIf="radioBtn == 0" >Done</button>
+      <button class="btn btn-done" (click)="addCusDivBtn('products')" [disabled]="!products.valid"  [style.cursor]="products.valid  ? 'pointer'  : 'no-drop'" *ngIf="radioBtn == 1" >Done</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div [ngClass]="{'loader-hidden': !show}">
+  <div class="loader-overlay">
+    <div>
+      <img class="loader" src='./assets/images/loading_wheel.gif' />
+    </div>
+  </div>
+</div>
+<div [ngClass]="{'in': show, 'modal-backdrop': show, 'fade':show}"></div>

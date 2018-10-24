@@ -1,0 +1,25 @@
+<div class="toolbar__background" [ngClass]="{'showLogout': showDropdown}"
+*ngIf="showMenu">
+  <div class="homeMainDiv">
+    <!-- <div class="toshiba_logo_home">
+      <img class="logoDimensions" src="assets/images/toshibaLogo.png" [routerLink]="['/dashboard']">
+    </div> -->
+    <div class="toshiba_user">
+      <label>Settings</label>
+      <span class="down-arrow"><img src="assets/images/arrow-drop-down.png" (click)="showSideDropdown()"></span>
+    </div>
+    <div class="toshiba_user user-management"> 
+      <i class="fa fa-users peopleIcon" aria-hidden="true"></i>
+      <a [routerLink]="['/userManagement']">Users Details</a>
+    </div>
+    <!-- <div class="toshiba_home user-management" >
+        <i class="fa fa-home homeIcon" aria-hidden="true"></i>
+        <a [routerLink]="['/dashboard']">Home</a>
+    </div> -->
+    <div class="sideDropdown" *ngIf="showDropdown">
+      <ul>
+        <li (click)="logout()">Log out</li>
+      </ul>
+    </div>
+  </div>
+</div>

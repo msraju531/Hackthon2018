@@ -1,0 +1,349 @@
+import {Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import { config } from '../../providers/config';
+import { Response } from '@angular/http';
+import { RequestOptions } from '@angular/http';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+let token = localStorage.getItem('token');
+
+// const httpOptions = {
+//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+// };
+
+@Injectable()
+export class AuthService {
+  loginUrl = '/login';
+  forgotUrl = '/forgotPassword';
+  resetPasswordUrl = '/resetPassword';
+  usersLists = '/showUsers';
+  activateOrDeactivateUser = '/activateOrDeactivate';
+  addUser = '/addUser';
+  addPage = '/addPage';
+  addSection = '/addSection';
+  createManual = '/addManual';
+  editUser = '/editUser';
+  allPages = '/showExistingContent/pages'
+  allSections = '/showExistingContent/sections'
+  allManuals = '/showExistingContent/manuals';
+  allSubSections = '/showExistingContent/subSections';
+  allDivisions = '/showExistingContent/divisions';
+  getEditedInfo = '/editUser';
+  editPage = '/showExistingDetails/pages';
+  editPageDone = '/editPage';
+  addSubSection = '/addSubSection';
+  addDivision = '/addDivision';
+  editSection = '/showExistingDetails/sections';
+  editSectionDone = '/editSection';
+  editSubSection = '/showExistingDetails/subSections';
+  editSubSectionDone = '/editSubSection';
+  editUsersDone = '/editUserConfirm';
+
+  private apiData = new BehaviorSubject<any>(null);
+  public apiData$ = this.apiData.asObservable();
+  contentType:any;
+
+  constructor(private http:HttpClient) { }
+ 
+
+  // Login authentication
+  login(model) {
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json'})};
+    let body = JSON.stringify({name:model.username,password:model.password});
+    return this.http.post(this.getFullUrl(this.loginUrl), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  // Forgot password
+  forgotPasswordApi(email) {
+    console.log(email);
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json'})};
+    let body = JSON.stringify({userEmail:email.userEmail});
+    return this.http.post(this.getFullUrl(this.forgotUrl), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //Resetting Password
+  resetPasswordApi(postData): Observable<any>{
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json'})};
+    let body = JSON.stringify({password:postData.newPwd, confirmPassword:postData.confirmPwd, confirm_key:postData.confirmKey});
+    return this.http.post(this.getFullUrl(this.resetPasswordUrl), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //getting all users
+  getUsers():Observable<any>{
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json', 'x-auth-token': token})};
+    return this.http.get(this.getFullUrl(this.usersLists), headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  
+
+  //activate or deactivate user
+  activateOrDeactivateApi(userId, status): Observable<any>{
+    let headers =  {headers: new  HttpHeaders({'x-auth-token': token})};
+    let user_Id = parseInt(userId);
+    let userStatus = parseInt(status);
+    let body = {userId:user_Id, isActive:userStatus};
+    return this.http.post(this.getFullUrl(this.activateOrDeactivateUser), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+//Adding User
+  addUserApi(model) {
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let body = JSON.stringify({firstName:model.firstName,lastName:model.lastName, userName:model.userName, userEmail:model.emailAddress, 
+      password:model.password, confirmPassword:model.confirmPassword, roleId:model.role});
+    return this.http.post(this.getFullUrl(this.addUser), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //Creating Manual
+  createManualApi(postData){
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','x-auth-token': token})};
+    let body = JSON.stringify({manualTitle:postData.title,authors:postData.author,userId:postData.userid});
+    return this.http.post(this.getFullUrl(this.createManual), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //Creating new Page
+  createPageApi(postData){
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','x-auth-token': token})};
+    let body = JSON.stringify({pageTitle:postData.pageTitle,headerColor:postData.headerColor,belongsToManual:postData.manualId,userId:postData.userid, pageOrder:postData.pageOrder});
+    return this.http.post(this.getFullUrl(this.addPage), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //creating new section
+  createSectionApi(postData){
+    let headers =  {headers: new  HttpHeaders({ 'x-auth-token': token })};
+    if(postData.content !== null && postData.sectionImageURL != null){
+      this.contentType = "text/image";
+    } else if(postData.content !== null && !postData.sectionImageURL !== null){
+      this.contentType = "text";
+    } else{
+      this.contentType = "image";
+    }
+    let formData:FormData = new FormData();
+    formData.append('sectionImageURL', postData.sectionImageURL);
+    formData.append('sectionTitle', postData.title);
+    formData.append('description', postData.content);
+    formData.append('typeOfContent', this.contentType);
+    formData.append('belongsToPage', postData.pageId);
+    formData.append('userId', postData.userid);
+    formData.append('sectionsOrder', postData.sectionOrder);
+    return this.http.post(this.getFullUrl(this.addSection), formData, headers).map((res:Response) => {
+      return res;
+    })
+  }
+
+  //adding subSection
+  createsubSectionApi(postData){
+    let headers =  {headers: new  HttpHeaders({ 'x-auth-token': token })};
+    if(postData.content !== null && postData.sectionImageURL != null){
+      this.contentType = "text/image";
+    } else if(postData.content !== null && !postData.sectionImageURL !== null){
+      this.contentType = "text";
+    } else{
+      this.contentType = "image";
+    }
+    let formData:FormData = new FormData();
+    formData.append('subSectionImageURL', postData.sectionImageURL);
+    formData.append('subSectionTitle', postData.title);
+    formData.append('description', postData.content);
+    formData.append('typeOfContent', this.contentType);
+    formData.append('belongsToSection', postData.sectionId);
+    formData.append('userId', postData.userid);
+    formData.append('subSectionsOrder', postData.subSectionOrder);
+    return this.http.post(this.getFullUrl(this.addSubSection), formData, headers).map((res:Response) => {
+      return res;
+    })
+  }
+  //all manuals
+  showAllManualsApi(){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    return this.http.get(this.getFullUrl(this.allManuals), headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  //showing all pages
+  showAllPagesApi(manualId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.allPages)+"?manualNo="+manualId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  //showing all sections
+  showAllSectionsApi(pageId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.allSections)+"?pageNo="+pageId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  showAllSubSectionsApi(sectionId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.allSubSections)+"?sectionNo="+sectionId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  showAllDivisionsApi(subSectionId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.allDivisions)+"?subSectionNo="+subSectionId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+
+  showAllDivisionsForSecApi(sectionId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.allDivisions)+"?sectionNo="+sectionId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+  //Getting data for editing users
+  getEditedData(userId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.getEditedInfo)+"?userId="+userId, headers)
+       .map((res:Response)=>  {
+         return res;
+       })
+  }
+  setData(data) { 
+    console.log(data);
+    this.apiData.next(data)
+  }
+
+  getPageDetails(pageId){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+    let params =  new HttpParams();
+    return this.http.get(this.getFullUrl(this.editPage)+"?pageNo="+pageId, headers)
+      .map((res:Response)=>  {
+        return res;
+      })
+    }
+
+    getSectionDetails(sectionId){
+      let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+      let params =  new HttpParams();
+      return this.http.get(this.getFullUrl(this.editSection)+"?sectionNo="+sectionId, headers)
+        .map((res:Response)=>  {
+          return res;
+        })
+      }
+
+    getSubSectionDetails(subSectionId){
+      let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json','x-auth-token': token})};
+      let params =  new HttpParams();
+      return this.http.get(this.getFullUrl(this.editSubSection)+"?subSectionNo="+subSectionId, headers)
+        .map((res:Response)=>  {
+          return res;
+        })
+    }
+  //edit page
+  editPageDoneApi(postData){
+    let headers =  {headers: new  HttpHeaders({'Content-Type': 'application/json', 'x-auth-token': token})};
+    let body = JSON.stringify({pageTitle:postData.pageTitle,pageOrder:postData.pageOrder,userId:postData.userId,
+      isActive:postData.isActive});
+    return this.http.post(this.getFullUrl(this.editPageDone), body, headers).map((res:Response) => {
+      return res;
+    }) 
+  }
+
+  editSectionDoneApi(postData){
+    let headers =  {headers: new  HttpHeaders({'x-auth-token': token})};
+    let formData:FormData = new FormData();
+    formData.append('sectionImageURL', postData.sectionImageURL);
+    formData.append('sectionTitle', postData.SectionTitle);
+    formData.append('description', postData.Description);
+    formData.append('typeOfContent', postData.typeOfContent);
+    formData.append('belongsToPage', postData.belongsToPage);
+    formData.append('sectionId', postData.sectionId);
+    formData.append('userId', postData.userId);
+    formData.append('isActive', postData.isActive);
+    formData.append('sectionsOrder', postData.SectionsOrder);
+    console.log(formData);
+    return this.http.post(this.getFullUrl(this.editSectionDone), formData, headers).map((res:Response) => {
+      return res;
+    }) 
+  }
+
+  editSubSectionDoneApi(postData){
+    let headers =  {headers: new  HttpHeaders({'x-auth-token': token})};
+    let formData:FormData = new FormData();
+    formData.append('subSectionImageURL', postData.subSectionImageURL);
+    formData.append('subSectionTitle', postData.subSectionTitle);
+    formData.append('description', postData.Description);
+    formData.append('typeOfContent', postData.typeOfContent);
+    formData.append('belongsToSection', postData.belongsToSection);
+    formData.append('subSectionId', postData.subSectionId);
+    formData.append('userId', postData.userId);
+    formData.append('isActive', postData.isActive);
+    formData.append('subSectionsOrder', postData.subSectionsOrder);
+    console.log(formData);
+    return this.http.post(this.getFullUrl(this.editSubSectionDone), formData, headers).map((res:Response) => {
+      return res;
+    }) 
+  }
+
+  editUsersDoneApi(postData){
+    let headers =  {headers: new  HttpHeaders({'x-auth-token': token})};
+    let formData:FormData = new FormData();
+    formData.append('firstName', postData.FirstName);
+    formData.append('lastName', postData.lastName);
+    formData.append('userName', postData.userName);
+    formData.append('userEmail', postData.emailAddress);
+    formData.append('password', postData.password);
+    formData.append('confirmPassword', postData.confirmPassword);
+    formData.append('userId', postData.userId);
+    formData.append('roleId', postData.role);
+    formData.append('profilePicURL', postData.profilePicURL);
+    console.log(formData);
+    return this.http.post(this.getFullUrl(this.editUsersDone), formData, headers).map((res:Response) => {
+      return res;
+    }) 
+  }
+  //create division
+  createDivisionApi(postData){
+    let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/json','x-auth-token': token})};
+    let body = JSON.stringify({divisionTitle:postData.title,description:postData.content,sectionId:postData.sectionId,subSectionId:postData.subSectionId,
+      userId:postData.userid, divisionsOrder:postData.divisionsOrder});
+    return this.http.post(this.getFullUrl(this.addDivision), body, headers).map((res:Response) => {
+      return res;
+    })
+  }
+  
+  //To get the full api url
+  private getFullUrl(url: string): string {
+    return config.api_url + url;
+  }
+  
+
+}

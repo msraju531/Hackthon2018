@@ -1,0 +1,256 @@
+.toolbar__background {
+    width: 100%;
+    height: 112px;
+    background-color: #02275c;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+  }
+  @media only screen and (min-device-width: 370px) and (max-device-width: 375px) and (orientation:portrait) {
+    .toolbar__background {
+     display: none !important;
+     background-color: red;
+    }
+    
+  }
+  .toshiba_logo_home{
+      font-size: 54px;
+      display: inline-block;
+  }
+  .toshiba_user{
+      font-size: 15px;
+      letter-spacing: -0px;
+      color: #ffffff;
+      float: right;
+      margin-top:22px;
+      margin-right: 75px;
+      font-family: OpenSans;
+  }
+  
+  .homeMainDiv{
+    margin-left: 130px;
+  }
+  
+  .sideDropdown{
+      width: 90px;
+      height: 45px;
+      background-color: #fff;
+      position: absolute;
+      right: 0px;
+      top: 48px;
+      padding: 10px;
+      color: #000;
+      margin-right: 75px;
+  }
+  .sideDropdown ul{
+    padding:0px;
+    list-style: none;
+  }
+  .sideDropdown ul li{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+//user management=====================================
+.btn-plus{
+    background-color: white;
+    /* display: none; */
+    border-color: white;
+    border-width: 0px;
+}
+.addMargin{
+    margin-left: 6px;
+    padding-top:48px;
+}
+.addMarginMinus{
+    margin-left: 15px;
+
+}
+// multiselect-dropdown .dropdown-btn .dropdown-down {
+//     display: inline-block;
+//     top: 10px;
+//     width: 0;
+//     height: 0;
+//     border-top: 6px solid !important;
+//     border-left: 3px solid transparent !important;
+//     border-right: 4px solid transparent !important;
+// }
+.addDropDown{
+    padding-top: 25px;
+
+}
+.form-control{
+    height:34px !important;
+}
+.user-management{
+    padding: 0 35px;
+}
+.btn-new-user{
+    cursor:pointer;
+    color: #02275c;
+    border: 1px solid #02275c;
+    background: transparent;
+    font-size: 16px;
+    // margin-top: 40px;
+}
+.table{
+    width: 93%;
+    max-width: 93%;
+}
+.table-custom th{
+   text-align: center;
+   vertical-align: inherit;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 16px;
+}
+.table-custom td{
+    text-align: center;
+    vertical-align: inherit;
+    font-size: 14px;
+ }
+.custom-dropdown-toggle{
+    background: none;
+    float: right;
+}
+.custom-dropdown-toggle:after{
+   border: none;
+}
+.status-text{
+    vertical-align: -webkit-baseline-middle;
+}
+.activate{
+    color: #7dcfb6;
+}
+.deactivate{
+    color:#ff0048;
+}
+.custom-dropdown-menu .fa{
+    margin-right:20px;
+}
+.custom-dropdown-menu{
+    // top:35px !important;
+}
+table tr{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+table tbody{
+    max-height: 345px;
+    min-height: 160px;
+    overflow-y: scroll;
+    width: 1069px;
+    display: block;
+    position: relative;
+    // max-height: 345px;
+    // min-height: 160px;
+    // overflow-y: scroll;
+    // width: 100%;
+    // display: block;
+    // position: relative;
+}
+thead tr{
+    width:1052px;
+}
+thead tr,th,td{
+    border: 2px solid #dddd;
+}
+.dropdown-menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 10px;
+    padding: 10px 0;
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    padding: 11px 4px;
+}
+.dropdown-item{
+    cursor:pointer;
+    display: block;
+    width: 100%;
+    /* padding: .25rem 1.5rem; */
+    clear: both;
+    font-weight: 500;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+    padding: 8px 24px;
+}
+a:not([href]):not([tabindex]):hover {
+    background-color:azure;
+    text-decoration: none;
+}
+.user-management-add .btn{
+    background:none;
+    width:140px;
+    height: 40px;    
+}
+.user-management-add .btn-cancel{
+    margin-right: 35px;
+    border:1px solid red; 
+    color: red;   
+}
+.user-management-add .btn-done{   
+    border:1px solid green;
+    color:green;
+}
+.user-management-add label{
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.edit-management-add .btn{
+    background:none;
+    width:140px;
+    height: 40px;    
+}
+.edit-management-add .btn-cancel{
+    margin-right: 35px;
+    border:1px solid red;    
+}
+.edit-management-add .btn-done{   
+    border:1px solid green;
+    color:green;
+}
+.edit-management-add label{
+    font-size: 14px;
+    opacity: 0.5;
+}
+.btn{
+    cursor:pointer;
+}
+.errorMessage {
+    color:red;
+    font-size:14px;
+    // font-family: OpenSans;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 540;
+    padding: 24px 0px;
+}
+.successMessage{
+    color:green;
+    font-size: 18px;
+    font-family: OpenSans;
+    padding: 24px 0px;
+}
+.fa-pencil {
+    color: green;
+}
+.fa-check {
+    color: green;
+}
+.fa-trash {
+    color: red;
+}
+.modal-header .close {
+    margin-top: -21px;
+}

@@ -1,0 +1,176 @@
+<!-- Users table -->
+<div class="container user-management" *ngIf='!addUM'>
+  <div class="row" style="padding-top:24px;">
+        <!-- <div class="col text-right" style="padding-right: 60px;">
+            <button class="btn btn-new-user" (click)='addUserManagement()'>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Add New User</span>
+            </button>
+        </div> -->
+        <div class="col-sm-3 col-md-3 col-lg-3 addCustomer">
+            <button class="btn btn-new-user" [routerLink]="['/addCustomerProduct']">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Customer/Product</span>
+            </button>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 addUser">
+            <button class="btn btn-new-user" (click)='addUserManagement()'>
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Add New User</span>
+            </button>
+        </div>
+  </div>
+  <div class="row" style="padding-top:24px;">
+      <div class="col">
+          <table class="table table-responsive table-bordered table-custom" *ngIf="userDetails">
+              <thead>
+                  <tr style="border: 2px solid #8080802e;">
+                      <th>User Name</th>
+                      <th>Full Name</th>
+                      <th>User Status</th>
+                  </tr>
+              </thead>
+              <!-- <tbody *ngIf='userDataload'>
+                    <tr >
+                        <div class="ses-spinner">
+                            <img src='./assets/images/loading_wheel.gif' />
+                        </div>
+                    </tr>
+              </tbody> -->
+              <tbody *ngIf='!userDataload'>
+                  <tr *ngFor="let user of userDetails;" >
+                      <td>{{user.userName}}</td>
+                      <td>{{user.fullName}}</td>
+                      <td class="dropdown">
+                          <span class="status-text">{{user.isActive ? 'Active':'Inactive'}}</span>
+                          <button class="btn  dropdown-toggle custom-dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                          </button>
+                          <div class="dropdown-menu custom-dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <!-- <a class="dropdown-item" (click)='editUserFn(user)'> -->
+                              <a class="dropdown-item" [routerLink]="['/editUser',user.userID]">
+                                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                                  <span>Edit User</span>
+                              </a>
+                              <a class="dropdown-item activate" data-toggle="modal" (click)="getUserId(user.isActive, user.userID)" data-target="#activateModal"  *ngIf='!user.isActive'>
+                                  <i class="fa fa-check" aria-hidden="true"></i>
+                                  <span>Activate User</span>
+                              </a>
+                              <a class="dropdown-item deactivate" data-toggle="modal" (click)="getUserId(user.isActive, user.userID)" data-target="#deactivateModal" *ngIf='user.isActive'>
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                  <span>Deactivate User</span>
+                              </a>
+                          </div>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<!-- Add User Management -->
+<div class="container user-management-add" *ngIf='addUM'>
+    <div class="row addMargin">
+        <!-- <span class="addMargin"></span> -->
+        <div class='col-sm-5 col-md-5 col-lg-5'>
+            <h2>Add New User</h2>
+        </div>
+    </div>
+    <span *ngIf="addUserError" class="errorMessage" id="errors">
+        {{errorMessage}}.
+    </span>
+    <!-- <div class="errorMessage" *ngIf="user.hasError('email', 'email') && user.controls['email'].touched && !emailEmpty">Invalid email.</div>  -->
+    <form [formGroup]="user" autocomplete="off">
+        <div class="row addMargin">
+            <!-- <span class="addMargin"></span> -->
+            <div class="form-group col-sm-5 col-md-5 col-lg-5">
+                <label>Full Name*</label>
+                <input type="text" class="form-control" formControlName="fullName" (keypress)="noWhiteSpaceFull($event.target.value,'fullName')"  maxlength="90" autocomplete="off"  required/>
+            </div>
+            <div class="form-group col-sm-5 col-md-5 col-lg-5">
+                <label>Username*</label>
+                <input type="text" class="form-control" formControlName="userName"  id="customerName" (blur)="addUserName($event.target.value)"  (keyup)="noWhiteSpace()"  (click)="noWhiteSpace()" maxlength="90" autocomplete="off" required/>
+            </div>
+        </div>  
+        <div formArrayName="customerAndProducts" >
+            <div class="row" style="padding-top:24px;" *ngFor="let subHeader of formData.controls; let idx = index;">
+                <span class="addDropDown" (click)="addCusProd();" style="cursor:pointer;float:left;" *ngIf="idx == 0 && showPlusSymbol && user.valid" >
+                    <span><img src="./assets/images/add-circle.png"></span>
+                </span>
+                <div class=" col-sm-5 col-md-5 col-lg-5" [formGroupName]="idx" [style.margin-left] = "idx == 0 && showPlusSymbol && user.valid ? '-4px' : '15px'">
+                    <label>Customers*</label>
+                    <select class="form-control" id="cus" placeholder="select Customer" formControlName="customers" (ngModelChange)="onChange($event,idx)" required>
+                        <option *ngFor="let customer of subHeader.value.customersListArray"  [ngValue]="customer" > {{customer.customerName}}  </option>
+                    </select>
+                </div>
+                <div class=" col-sm-5 col-md-5 col-lg-5" [formGroupName]="idx"  [style.margin-left] = "idx == 0 && showPlusSymbol && user.valid ? '-7px' : '-4px'" >
+                    <label>Products*</label>
+                     <ng-multiselect-dropdown
+                        [placeholder]="'Select Products'"
+                        [data]="products"
+                        [settings]="dropdownSettings" 
+                        formControlName="selectedproducts" required>
+                    </ng-multiselect-dropdown>
+                </div>
+                <span class="addDropDownMinus" (click)="removeCusProd(idx)" style="cursor:pointer;padding-top:20px;" *ngIf="idx > 0">
+                    <span><img src="./assets/images/minus-circle.png" style="padding-top:30px"></span>
+                </span>         
+            </div>
+        </div>
+    </form>
+    <div class="row" style="padding-top:48px;margin-bottom: 10px;">
+        <div class="col-sm-10 text-right">
+            <div class="successMessage" *ngIf='addUserResponseStatus'>{{addUserResponseMessage}}</div>
+            <div class="errorMessage" *ngIf='!addUserResponseStatus'>{{addUserErrorMessage}}</div>
+            <button class="btn btn-cancel" (click)='cancel()'>Cancel</button>
+            <button class="btn btn-done" (click)='addUserBtn(user)' [disabled]="!user.valid && !addUserResponseStatus " [style.cursor]="user.valid  ? 'pointer'  : 'no-drop'">Done</button>
+        </div>
+    </div>
+    <div class="ses-spinner" *ngIf='addUserLoading'>
+        <img src='./assets/images/loading_wheel.gif' />
+    </div>
+</div>
+
+
+<!-- Activate Or Deactivate  -->
+<div class="modal fade" id="activateModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Activate</h4>
+                <button type="button" class="close hand" data-dismiss="modal" #closeActiveModal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to activate this user?</p>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn btn-primary" (click)="activateUser()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deactivateModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deactivate</h4>
+                <button type="button" class="close hand" data-dismiss="modal" #closeDeactiveModal>&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to deactivate this user?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="activateUser()">Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

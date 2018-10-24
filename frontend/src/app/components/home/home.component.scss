@@ -1,0 +1,387 @@
+
+.toolbar__background {
+    width: 100%;
+    height: 55px;
+    background-color:gray;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+  }
+  .showLogout {
+    height :115px !important;
+  }
+  @media only screen and (min-device-width: 370px) and (max-device-width: 375px) and (orientation:portrait) {
+    .toolbar__background {
+     display: none !important;
+     background-color: red;
+    }
+    
+  }
+  .toshiba_logo_home{
+      font-size: 54px;
+      display: inline-block;
+      cursor: pointer;
+  }
+  .toshiba_user{
+    font-size: 15px;
+    letter-spacing: -0px;
+    color: #ffffff;
+    float: right;
+    margin-top: 22px;
+    margin-right: 75px;
+    font-family: "Open Sans", sans-serif;
+  }
+  .toshiba_home{
+    font-size: 15px;
+    letter-spacing: -0px;
+    color: #ffffff;
+    float: right;
+    margin-top: 19px;
+    margin-right: 75px;
+    font-family: "Open Sans", sans-serif;
+  }
+  label{
+    font-weight: 500;
+  }
+  
+  .homeIcon{
+    font-size: 23px;
+
+  }
+  .homeMainDiv{
+    margin-left: 130px;
+  }
+  
+  .sideDropdown{
+      width: 90px;
+      height: 45px;
+      background-color: #fff;
+      position: absolute;
+      right: 0px;
+      top: 48px;
+      padding: 10px;
+      color: #000;
+      margin-right: 75px;
+  }
+  .sideDropdown ul{
+    padding:0px;
+    list-style: none;
+  }
+  .sideDropdown ul li{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .downloadClassBtn{
+    padding :30px;
+  }
+  
+  #btn-upload
+  {
+    max-width: 131px;
+  }
+  
+  
+  .tile{
+    border: 2px solid #233d77;
+    width: 463px;
+    height: 339px;
+    margin-left: 445px;
+    border-radius: 15px;
+    text-align: center;
+    -webkit-box-shadow: 4px 4px 4px #233d77;
+    // box-shadow: 4px 4px 4px #233d77;
+    box-shadow: 0px 0px 10px #233d77;
+    margin-bottom: 30px;
+    margin-top: 65px;
+    padding:85px;
+  }
+  .btn-primary{
+    padding: 17px 42px;
+    font-size: 16px;
+    background-color:#233d77;
+    font-family: OpenSans;
+  }
+  .btn-ok{
+    padding:10px 27px;
+  }
+  .btn-close{
+    padding: 10px 19px;
+  }
+  .down-arrow{
+    padding: 2px;
+    cursor: pointer;
+  }
+  .btn-file {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 8px 8px 10px #233d77;
+  }
+  .btn-ok, .btn-close{
+    box-shadow: none;
+  }
+  .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;   
+      cursor: inherit;
+      display: block;
+  }
+  .modal-content{
+    width: 509px;
+    height: 440px;
+    margin-top: 118px;
+    box-sizing: border-box;
+  }
+  .modal-title{
+    text-align: center;
+    font-size: 22px;
+    font-family: OpenSans;
+  }
+  .customerDiv{
+    width:100px;
+    height:20px;
+  }
+  .margin-auto {
+    margin: 0 auto;
+  }
+  
+  @media only screen and (max-width:1280px){
+    .margin-left-50 {
+        margin-left: 50px !important;
+    }
+  }
+  
+  @media only screen and (max-width:890px){
+    .modal-content{
+      width: 421px;
+      height: 591px;
+      margin-top: 118px;
+      box-sizing: border-box;
+    }
+  }
+  
+  
+  @media only screen and (max-width:890px){
+    .tile {
+      margin-left: 188px;
+    }
+    .staticText{
+      font-family: OpenSans;
+      font-size: 40px;
+      margin-top: 20px;
+      color: #02275c;
+    
+    }
+  }
+  
+  
+  .modal-footer{
+    border-top:0px;
+    padding: 11px;
+  }
+  
+  .staticText{
+    font-family: OpenSans;
+    font-size: 40px;
+    text-align: center;
+    margin-top: 20px;
+    color: #02275c;
+  }
+  
+  
+  
+  .loaderClass{
+    text-align: center;
+    font-size:22px;
+    font-family: OpenSans;
+    margin-bottom:10px;
+    // width:70px;
+    // height: 10px;
+  }
+  
+  .demandUploadTitle{
+    text-align:center;
+    padding: 15px;
+    font-size:22px;
+  
+  }
+  .uploadClass{
+    padding: 8px;
+  }
+  
+  .successMessage{
+    color:green;
+    font-size: 18px;
+    font-family: OpenSans;
+    // font-weight: 540;
+  
+  }
+  .errorMessage{
+    color:red;
+    font-size:14px;
+    // font-family: OpenSans;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 540;
+  }
+  
+  //radio buttons
+  /* The container */
+  .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    height: 23px;
+    width: 23px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #233d77;
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    font-family: OpenSans;
+  
+  }
+  .dropdownLabels{
+    padding:8px
+  }
+  .radioTitle-col{
+    padding:0px !important;
+    // max-width: 130px;
+  
+  }
+  .radioTitle{
+    padding: 9px;
+    font-size: 17px;
+    font-family: OpenSans;
+  }
+  .radioTitles{
+    font-size: 17px;
+    font-family: OpenSans;
+  }
+  .dropdownSelect :focus {
+    outline: black auto 5px !important;
+    outline-color: black !important;
+    // outline: #233d77 auto 5px !important;
+    // outline-color: #233d77 !important;
+    // background-color: #233d77;
+  }
+  .title{
+    padding: 25px;
+  }
+  
+  .checkboxClass{
+    width: 100px;
+    height: 21px;
+    font-family: OpenSans;
+  }
+  
+  .dropdown{
+    padding: 8px;
+    font-size: 17px;
+    font-family: OpenSans;
+  }
+  
+  .dropdownSelect{
+    width: 160px;
+    padding: 0px 25px;
+    border-radius: 9px;
+    margin-top: 10px;
+    margin-right: 61px;
+  }
+  
+  //borderClass
+  .borderClass{
+    border: 2px solid #233d77;
+    /* padding: 30px; */
+    width: 754px;
+    height: 500px;
+    margin-left: 306px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px #233d77;
+    margin-bottom: 30px;
+  }
+  
+  //usermanagement====================================
+  // .toshiba_user{
+  //   font-size: 17px;
+  //   letter-spacing: -0px;
+  //   color: #ffffff;
+  //   float: right;
+  //   margin-top: 22px;
+  //   margin-right: 75px;
+  //   font-family: OpenSans;
+  //   // font-size: 15px;
+  //   // letter-spacing: -0px;
+  //   // color: #ffffff;
+  //   // float: right;
+  //   // margin-top:22px;
+  //   // margin-right: 75px;
+  //   // font-family: OpenSans;
+  //   // font-weight: bold;
+  // }
+  .user-management a{
+    color:#fff;
+    margin-left: 10px;
+    text-decoration: none;
+  }
+  .user-management a:hover{
+    color:#ff0000;
+  }
+  .user-management:hover{
+    color:#ff0000;
+  }

@@ -1,0 +1,73 @@
+
+.staticTextSel{
+    font-size: 14px;
+    margin-left: 0px;
+    padding-top:48px;
+}
+.categoryClass{
+    font-size: 20px;
+    padding-top:48px;
+}
+.categoryClass .staticTextCat{
+    opacity: 0.5;
+    cursor: auto;
+}
+
+.checkboxClass{
+    position:inherit !important;
+    margin-right: 10px;
+    margin-left: 0px !important;
+}
+.radio-inline{
+    padding:0px !important;
+}
+.addCategory .btn{
+    background:none;
+    width:140px;
+    height: 40px;    
+}
+.addCategory .btn-cancel{
+    margin-right: 35px;
+    border:1px solid red; 
+    color: red;   
+}
+.addCategory .btn-done{   
+    border:1px solid green;
+    color:green;
+}
+.form-group{
+    font-size: 20px;
+}
+.btn-new-user{
+    cursor:pointer;
+    color: #02275c;
+    border: 1px solid #02275c;
+    background: transparent;
+    font-size: 16px;
+    // margin-top: 40px;
+}
+.customerClass label{
+    font-size: 14px;
+    opacity: 0.5;
+}
+ .staticDivisionClass, .divisionClass{
+    padding-top: 24px;
+}
+.customerClass{
+
+    padding-top: 48px;
+}
+.errorMessage {
+    color:red;
+    font-size:14px;
+    // font-family: OpenSans;
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 24px 0px;
+    font-weight: 540;
+}
+.successMessage{
+    color:green;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 24px 0px;
+}

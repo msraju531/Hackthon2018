@@ -1,0 +1,142 @@
+// /*styles for home content only*/
+
+
+.backgroundImage{
+    width: 100%;
+    height: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    overflow: none;
+    /*background-image: url('/assets/img/shutterstock_566760472.jpg');*/
+}
+
+.signinDiv{
+    width: 360px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 38%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 15px;
+    height: auto;
+}
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa-icon {
+  position: absolute;
+  padding: 18px 12px;;
+  pointer-events: none;
+}
+
+// /* align icon */
+.left-addon .fa-icon  { left:  0px;}
+.right-addon .fa-icon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  40px; }
+.right-addon input { padding-right: 30px; }
+.user_img {
+  top: 46px;
+  left: 15px;
+  color: gray;
+  position: absolute;
+}
+.signinText{
+  height: 32px;
+  font-weight: normal;
+  font-style: normal;
+  // font:helvetica neue-light-webfont;
+  //font-family: HelveticaNeueHv;
+  font-family: cursive;
+  font-size: 23px;
+  font-weight: bold;
+  line-height: 1.23;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 0px;
+}
+@media only screen and (max-width:1280px){
+    .signinText {
+        font-size: 23px !important;
+    }
+  }
+.inputText{
+
+    background-color: #f7f7f8 !important;
+    font-size: 14px !important;
+    color: #b3bdc2 !important;
+    width: 330px;
+    height: 48px;
+    background-color: #f7f7f8;
+    font-size: 14px;
+}
+.btnSignin{
+  color: #ffffff;
+  background-color: #00C8FF !important;
+  width: 100px;
+  height: 30px;
+  border: #00C8FF !important;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.Forgot-password {
+  font-size: 14px;
+  text-align: center;
+  color: #696d6f;
+  cursor: pointer;
+  margin-bottom: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  float: right;
+}
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ::i-block-chrome, .signinText{
+        font-size: 23px !important;
+    }
+}
+
+.form-control{
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #495057 !important;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+p{
+  margin-top: 0;
+}
+
+.errorMessage{
+
+  font-family: OpenSans;
+  position: relative;
+  color: red;
+  font-size: 15px;
+  margin-top: 10px;
+  &.resetErrorMsg{
+      position: relative;
+      top: 30px !important;
+  }
+}

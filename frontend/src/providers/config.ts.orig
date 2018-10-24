@@ -1,0 +1,22 @@
+
+/* Environments setup */
+
+const env = 'DEV';
+let url;
+
+if (env === 'DEV') {
+    url = { 
+        api_url:'http://192.168.1.52:3000/api/v1',
+    };
+}else if (env === 'STAGE') {
+    url = {
+        api_url: 'http://192.168.1.52:3000/api/v1',
+    };
+}else if (env === 'PROD') {
+    url = {
+        api_url: 'http://192.168.1.52:3000/api/v1',
+    };
+}
+
+export const config = url;
+

@@ -1,0 +1,22 @@
+.loader-hidden {
+    visibility: hidden;
+}
+.loader-overlay {
+    position: absolute;
+    top: 40%;
+    left: 43%;
+    opacity: 1;
+    z-index: 9999;
+    img {
+        height: 72px;
+    }
+    
+}
+.modal-backdrop.in {
+    opacity: 0.3;
+}
+@media only screen and (max-width: 480px) {
+    .loader-overlay {
+        left: 30%;
+    }
+}

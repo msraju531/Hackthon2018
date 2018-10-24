@@ -1,0 +1,65 @@
+
+<!-- Edit user -->
+<div class="container user-management-add" >
+    <div class="row  addMargin">
+        <div class='col-sm-5 col-md-5 col-lg-5'>
+            <h2>Edit User</h2>
+        </div>
+    </div>
+    <!-- <span *ngIf="addUserError" class="errorMessage" id="errors">
+        {{errorMessage}}.
+    </span> -->
+    <form [formGroup]="user" autocomplete="off">
+        <div class="row addMargin">
+            <!-- <span class="addMargin"></span> -->
+            <div class="form-group col-sm-5 col-md-5 col-lg-5">
+                <label>Full Name*</label>
+                <input type="text" class="form-control" formControlName="fullName" (keypress)="noWhiteSpaceFull($event.target.value,'fullName')" autocomplete="off" (focus)="clearAllMessages()" required/>
+            </div>
+            <div class="form-group col-sm-5 col-md-5 col-lg-5">
+                <label>Username*</label>
+                <input type="text" class="form-control" formControlName="userName" autocomplete="off"  id="customerName" (focus)="clearAllMessages()" (keyup)="noWhiteSpace()"  (click)="noWhiteSpace()"  required/>
+            </div>
+        </div>  
+        <div formArrayName="customerAndProducts" >
+            <div class="row" style="padding-top:24px;" *ngFor="let subHeader of formData.controls; let idx = index;">
+                <span class="addDropDown" (click)="addSubHeader();" style="cursor:pointer;float:left;" *ngIf="idx == 0 && user.valid && !this.isAllCustomer" >
+                    <span><img src="./assets/images/add-circle.png"></span>
+                </span>
+                <div class=" col-sm-5 col-md-5 col-lg-5" [formGroupName]="idx" [style.margin-left] = "idx == 0 && user.valid && !this.isAllCustomer ? '-4px' : '15px'">
+                    <label>Customers</label>
+                    <select class="form-control" formControlName="customers" (ngModelChange)="onChange($event,idx)"   required>
+                        <option *ngFor="let customer of subHeader.value.customersListArray"  [ngValue]="subHeader.value.customers && (subHeader.value.customers.customerName == customer.customerName) ? subHeader.value.customers : customer" [attr.selected]="subHeader.value.customers && (subHeader.value.customers.customerName == customer.customerName)? subHeader.value.customers.customerName: null" >  {{customer.customerName}}  </option>
+                    </select>
+                </div>
+                <div class=" col-sm-5 col-md-5 col-lg-5" [formGroupName]="idx" style = "margin-left:-7px">
+                    <label>Products</label>
+                    <ng-multiselect-dropdown
+                        [data]="products" 
+                        selected-model="subHeader.value.selectedProducts"
+                        [settings]="dropdownSettings"
+                        formControlName="selectedproducts"
+                        (focus)="clearAllMessages()"
+                    >
+                    </ng-multiselect-dropdown>
+                </div>
+                <span class="addDropDownMinus" (click)="removeCusProd(idx)" style="cursor:pointer;padding-top:20px;" *ngIf="idx > 0" >
+                    <span><img src="./assets/images/minus-circle.png" style="padding-top:30px"></span>
+                </span>         
+            </div>
+        </div>
+    </form>
+    <div class="row" style="padding-top:48px;margin-bottom: 10px;">
+        <div class="col-sm-10 text-right">
+            <div class="successMessage" *ngIf='addUserResponseStatus' >{{addUserResponseMessage}}</div>
+            <div class="errorMessage" *ngIf='!addUserResponseStatus'>{{addUserErrorMessage}}</div>
+            <button class="btn btn-cancel" [routerLink]="['/userManagement']">Cancel</button>
+            <button class="btn btn-done" (click)="editUserBtn(user)" [disabled]="!user.valid" [style.cursor]="user.valid  ? 'pointer'  : 'no-drop'">Done</button>
+        </div>
+    </div>
+    <div class="ses-spinner" *ngIf='addUserLoading'  style="position:absolute;top:146%;left:40%;">
+        <img src='../../assets/img/loading_wheel.gif' />
+    </div>
+</div>
+
+
