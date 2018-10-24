@@ -32,6 +32,5 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## Git URL's for toshiba_demand_upload development source code
 
-http://192.168.1.121/git/toshiba-demand_upload-client.git
+ 
