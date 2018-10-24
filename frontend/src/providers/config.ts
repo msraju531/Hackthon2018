@@ -5,8 +5,8 @@ let url;
 
 if (env === 'STAGE') {
     url = { 
-        api_url: 'https://sdt.taec.toshiba.com/demand_upload_api/api/v1',
-        //api_url: 'http://192.168.1.109:5000/api/v1',
+        //api_url: 'https://sdt.taec.toshiba.com/demand_upload_api/api/v1',
+        api_url: 'http://192.168.1.109:5000/api/v1',
     };
 }else if (env === 'DEV') {
     url = {
